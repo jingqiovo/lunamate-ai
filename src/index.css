@@ -1,0 +1,403 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Caveat:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-moon-950 text-ink-primary font-body antialiased;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  /* Focus visible */
+  :focus-visible {
+    outline: 2px solid #E8B86D;
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(232, 184, 109, 0.2);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(232, 184, 109, 0.4);
+  }
+}
+
+@layer components {
+  /* ========== Layout ========== */
+  .app-container {
+    @apply min-h-screen;
+    background: 
+      radial-gradient(ellipse 80% 50% at 20% -10%, rgba(232, 184, 109, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 80% 10%, rgba(147, 51, 234, 0.06) 0%, transparent 40%),
+      linear-gradient(180deg, #1A1A2E 0%, #0D0D1A 100%);
+  }
+
+  .mobile-container {
+    @apply max-w-[430px] mx-auto relative;
+  }
+
+  /* ========== Navigation ========== */
+  .nav-glass {
+    background: rgba(26, 26, 46, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(232, 184, 109, 0.1);
+  }
+
+  /* ========== Cards ========== */
+  .card-moon {
+    @apply rounded-3xl border overflow-hidden;
+    background: rgba(26, 26, 46, 0.6);
+    border-color: rgba(232, 184, 109, 0.15);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .card-moon:hover {
+    border-color: rgba(232, 184, 109, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 40px rgba(232, 184, 109, 0.05);
+  }
+
+  .card-float {
+    @apply transition-all duration-300 cursor-pointer;
+  }
+
+  .card-float:hover {
+    transform: translateY(-4px);
+  }
+
+  /* ========== Inputs ========== */
+  .input-moon {
+    @apply w-full rounded-2xl px-5 py-4 text-ink-primary placeholder:text-ink-muted transition-all duration-300;
+    background: rgba(26, 26, 46, 0.8);
+    border: 1px solid rgba(232, 184, 109, 0.15);
+  }
+
+  .input-moon:focus {
+    border-color: #E8B86D;
+    box-shadow: 0 0 0 3px rgba(232, 184, 109, 0.15), 0 0 20px rgba(232, 184, 109, 0.1);
+    outline: none;
+  }
+
+  /* ========== Buttons ========== */
+  .btn-primary {
+    @apply relative overflow-hidden rounded-2xl font-medium text-moon-950 px-8 py-4 transition-all duration-300;
+    background: linear-gradient(135deg, #E8B86D 0%, #FCD34D 100%);
+    box-shadow: 0 4px 20px rgba(232, 184, 109, 0.3);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 8px 30px rgba(232, 184, 109, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  .btn-primary:disabled {
+    @apply opacity-50 cursor-not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .btn-secondary {
+    @apply rounded-2xl font-medium px-8 py-4 transition-all duration-300 border;
+    background: rgba(26, 26, 46, 0.8);
+    border-color: rgba(232, 184, 109, 0.25);
+    color: #E8B86D;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(232, 184, 109, 0.1);
+    border-color: rgba(232, 184, 109, 0.4);
+  }
+
+  .btn-ghost {
+    @apply rounded-xl px-4 py-2 text-ink-secondary transition-all duration-200;
+  }
+
+  .btn-ghost:hover {
+    background: rgba(232, 184, 109, 0.08);
+    color: #E8B86D;
+  }
+
+  .btn-press {
+    @apply transition-transform duration-150 active:scale-95;
+  }
+
+  /* ========== Chat Bubbles ========== */
+  .bubble-ink {
+    @apply rounded-3xl rounded-bl-md px-5 py-4 max-w-[85%];
+    background: rgba(26, 26, 46, 0.9);
+    border: 1px solid rgba(232, 184, 109, 0.12);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .bubble-moon {
+    @apply rounded-3xl rounded-br-md px-5 py-4 max-w-[85%];
+    background: linear-gradient(135deg, rgba(232, 184, 109, 0.9), rgba(252, 211, 77, 0.85));
+    color: #1A1A2E;
+    box-shadow: 0 4px 16px rgba(232, 184, 109, 0.25);
+  }
+
+  /* ========== Avatar ========== */
+  .avatar {
+    @apply rounded-full flex items-center justify-center text-white font-display;
+  }
+
+  .avatar-glow {
+    box-shadow: 0 0 30px rgba(232, 184, 109, 0.3);
+  }
+
+  /* Character avatars with gradient backgrounds */
+  .avatar-luna { background: linear-gradient(135deg, #E8B4B8, #F5D6E0); }
+  .avatar-rin { background: linear-gradient(135deg, #6B7280, #9CA3AF); }
+  .avatar-mira { background: linear-gradient(135deg, #8B9A82, #A4B0A1); }
+  .avatar-nono { background: linear-gradient(135deg, #FFD1DC, #FFE4E1); }
+  .avatar-yuki { background: linear-gradient(135deg, #D4E5ED, #E8F4F8); }
+  .avatar-sera { background: linear-gradient(135deg, #DA70D6, #DDA0DD); }
+  .avatar-hana { background: linear-gradient(135deg, #FFA500, #FFD93D); }
+  .avatar-iris { background: linear-gradient(135deg, #8B5CF6, #6366F1); }
+
+  /* ========== Tags & Badges ========== */
+  .tag-moon {
+    @apply text-xs font-medium px-3 py-1.5 rounded-full border;
+    background: rgba(232, 184, 109, 0.08);
+    border-color: rgba(232, 184, 109, 0.2);
+    color: #E8B86D;
+  }
+
+  .badge-moon {
+    @apply text-xs font-semibold px-2.5 py-1 rounded-full;
+    background: linear-gradient(135deg, #E8B86D, #FCD34D);
+    color: #1A1A2E;
+  }
+
+  /* ========== Progress Bar ========== */
+  .progress-moon {
+    @apply h-1.5 rounded-full overflow-hidden;
+    background: rgba(232, 184, 109, 0.15);
+  }
+
+  .progress-moon-fill {
+    background: linear-gradient(90deg, #9333EA 0%, #E8B86D 50%, #FCD34D 100%);
+  }
+
+  /* ========== Bottom Navigation ========== */
+  .bottom-nav {
+    @apply fixed bottom-0 left-0 right-0 z-50;
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(232, 184, 109, 0.1);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  /* ========== Mood Tags ========== */
+  .mood-tag {
+    @apply px-4 py-2 rounded-full text-sm font-medium;
+  }
+
+  .mood-calm {
+    background: rgba(125, 211, 192, 0.15);
+    color: #7DD3C0;
+    border: 1px solid rgba(125, 211, 192, 0.3);
+  }
+
+  .mood-warm {
+    background: rgba(232, 184, 109, 0.15);
+    color: #E8B86D;
+    border: 1px solid rgba(232, 184, 109, 0.3);
+  }
+
+  .mood-bloom {
+    background: rgba(212, 165, 165, 0.15);
+    color: #D4A5A5;
+    border: 1px solid rgba(212, 165, 165, 0.3);
+  }
+
+  .mood-dusk {
+    background: rgba(155, 142, 168, 0.15);
+    color: #9B8EA8;
+    border: 1px solid rgba(155, 142, 168, 0.3);
+  }
+
+  .mood-night {
+    background: rgba(107, 122, 140, 0.15);
+    color: #6B7A8C;
+    border: 1px solid rgba(107, 122, 140, 0.3);
+  }
+
+  /* ========== Typing Indicator ========== */
+  .typing-dots {
+    @apply flex items-center gap-1.5;
+  }
+
+  .typing-dot {
+    @apply w-2 h-2 rounded-full;
+    background: rgba(232, 184, 109, 0.6);
+    animation: typingBounce 1.4s infinite ease-in-out;
+  }
+
+  .typing-dot:nth-child(1) { animation-delay: 0s; }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.6; }
+    30% { transform: translateY(-6px); opacity: 1; }
+  }
+
+  /* ========== Empty State ========== */
+  .empty-state {
+    @apply text-center py-16 px-8;
+  }
+
+  .empty-state-icon {
+    @apply w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center;
+    background: rgba(232, 184, 109, 0.08);
+  }
+
+  /* ========== Online Status ========== */
+  .status-dot {
+    @apply w-2.5 h-2.5 rounded-full;
+  }
+
+  .status-online {
+    background: #7DD3C0;
+    box-shadow: 0 0 10px rgba(125, 211, 192, 0.5);
+  }
+
+  .status-offline {
+    background: rgba(107, 114, 128, 0.5);
+  }
+
+  /* ========== Section Headers ========== */
+  .section-label {
+    @apply text-xs font-medium uppercase tracking-widest mb-4;
+    color: rgba(232, 184, 109, 0.6);
+  }
+
+  /* ========== Decorative Elements ========== */
+  .divider-ink {
+    @apply h-px w-full;
+    background: linear-gradient(90deg, transparent, rgba(232, 184, 109, 0.2), transparent);
+  }
+
+  .moon-glow {
+    position: relative;
+  }
+
+  .moon-glow::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle, rgba(232, 184, 109, 0.15) 0%, transparent 70%);
+    z-index: -1;
+    animation: glowPulse 4s ease-in-out infinite;
+  }
+
+  /* ========== Typography Utilities ========== */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .font-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .font-body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  .font-handwritten {
+    font-family: 'Caveat', cursive;
+  }
+
+  /* ========== Accessibility ========== */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Hide scrollbar utility */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* ========== Reduced Motion ========== */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ========== Membership Card ========== */
+  .membership-card {
+    @apply rounded-3xl border p-6 relative overflow-hidden;
+    background: rgba(26, 26, 46, 0.6);
+    border-color: rgba(232, 184, 109, 0.15);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .membership-featured {
+    border-color: rgba(232, 184, 109, 0.4);
+    box-shadow: 0 0 40px rgba(232, 184, 109, 0.15), 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  /* ========== Memory Card ========== */
+  .memory-card {
+    @apply rounded-3xl border p-5;
+    background: rgba(26, 26, 46, 0.5);
+    border-color: rgba(232, 184, 109, 0.12);
+    backdrop-filter: blur(12px);
+  }
+}
